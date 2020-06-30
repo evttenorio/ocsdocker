@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+    app:
+        container_name: 'debian-con'
+        restart: always
+        build: .
+        ports:
+            - 8080:80
+        depends_on:
+            - db
+        command:  ["./wait-for-it.sh", "db:3306", "--timeout=120", "--", "echo", "'Tudo ok!'"]
+    db:
+        image: mysql
+        container_name: 'mysql-compose'
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'db-compose'
+            MYSQL_USER: "${DB_MYSQL_USER}"
+            MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
