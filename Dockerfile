@@ -1,6 +1,7 @@
 #yum install httpd gdbm-devel perl-XML-LibXML perl perl-DBI perl-DBD-MySQL perl-libnet 
 FROM debian:stable-slim
 COPY ./flask-compose wait-for-it.sh
+RUN chmod +x wait-for-it.sh
 RUN apt update
 RUN apt-get install libgdbm-dev libxml-simple-perl perl libperl5.28 libdbi-perl\
                     libdbd-mysql-perl libapache-dbi-perl libnet-ip-perl\
@@ -22,6 +23,7 @@ RUN sed -i 's/max_execution_time = 30/max_execution_time = 200/g' /etc/php/7.3/a
 && sed -i 's/post_max_size = 8M/post_max_size = 128M/g' /etc/php/7.3/apache2/php.ini\
 && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 128M/g' /etc/php/7.3/apache2/php.ini
 
+
 #RUN sed -i 's/php_value post_max_size         101m/php_value post_max_size         128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf\
 #&& sed -i 's/php_value upload_max_filesize   100m/php_value upload_max_filesize   128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf
 
@@ -32,4 +34,4 @@ RUN sed -i 's/max_execution_time = 30/max_execution_time = 200/g' /etc/php/7.3/a
 #&& ln -s /etc/apache2/sites-available/zz-ocsinventory-restapi.conf /etc/apache2/sites-enabled/\
 #&& ln -s /etc/apache2/sites-available/ocsinventory-reports.conf /etc/apache2/sites-enabled/
 
-RUN chmod +x wait-for-it.sh
+
