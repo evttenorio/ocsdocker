@@ -1,19 +1,19 @@
 version: '3.7'
 services:
     app:
-        container_name: 'debian-con'
+        container_name: 'ocs_inventory'
         restart: always
         build: .
         ports:
             - 8080:80
         depends_on:
             - db
-        command:  ["./wait-for-it.sh", "db:3306", "--timeout=120", "--", "echo", "'Tudo ok!'"]
+        command: tail -f /dev/null 
     db:
-        image: mysql
-        container_name: 'mysql-compose'
+        image: mariadb
+        container_name: 'db-compose'
         restart: always
         environment:
-            MYSQL_DATABASE: 'db-compose'
+            MYSQL_DATABASE: 'ocsweb'
             MYSQL_USER: "${DB_MYSQL_USER}"
             MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
