@@ -23,13 +23,13 @@ RUN sed -i 's/max_execution_time = 30/max_execution_time = 200/g' /etc/php/7.3/a
 RUN wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/2.7/OCSNG_UNIX_SERVER_2.7.tar.gz\
 && tar -zxvf OCSNG_UNIX_SERVER_2.7.tar.gz
 
-#RUN sed -i 's/php_value post_max_size         101m/php_value post_max_size         128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf\
-#&& sed -i 's/php_value upload_max_filesize   100m/php_value upload_max_filesize   128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf
+RUN sed -i 's/php_value post_max_size         101m/php_value post_max_size         128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf\
+&& sed -i 's/php_value upload_max_filesize   100m/php_value upload_max_filesize   128m/g' /etc/apache2/sites-available/ocsinventory-reports.conf
 
-#RUN sed -i 's/PerlSetVar OCS_DB_PWD ocs/PerlSetVar OCS_DB_PWD @123compose/g' /etc/apache2/sites-available/z-ocsinventory-server.conf
+RUN sed -i 's/PerlSetVar OCS_DB_PWD ocs/PerlSetVar OCS_DB_PWD @123compose/g' /etc/apache2/sites-available/z-ocsinventory-server.conf
 
-#RUN ln -s /etc/apache2/sites-available/z-ocsinventory-server.conf /etc/apache2/sites-enabled/\
-#&& ln -s /etc/apache2/sites-available/zz-ocsinventory-restapi.conf /etc/apache2/sites-enabled/\
-#&& ln -s /etc/apache2/sites-available/ocsinventory-reports.conf /etc/apache2/sites-enabled/
+RUN ln -s /etc/apache2/sites-available/z-ocsinventory-server.conf /etc/apache2/sites-enabled/\
+&& ln -s /etc/apache2/sites-available/zz-ocsinventory-restapi.conf /etc/apache2/sites-enabled/\
+&& ln -s /etc/apache2/sites-available/ocsinventory-reports.conf /etc/apache2/sites-enabled/
 
 
